@@ -1,0 +1,7 @@
+# general directories to ignore
+bin/
+build/
+
+# extensions to ignore
+*.o
+*.out
