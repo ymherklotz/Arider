@@ -13,6 +13,6 @@
 #+LANGUAGE: en
 #+SELECT_TAGS: export
 
-** Introduction
+* Introduction
 
 This is a 2D game that is programed using the SDL2 library and OpenGL.
