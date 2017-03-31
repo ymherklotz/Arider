@@ -14,3 +14,4 @@ Makefile
 
 # specific directories to ignore
 /debug_build/
+/G*

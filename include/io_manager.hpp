@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-class IOManager
+class IoManager
 {
 public:
     static bool readFileToBuffer(const std::string &file_path, std::vector<unsigned char> &buffer);

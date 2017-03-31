@@ -12,7 +12,7 @@ GlTexture ImageLoader::loadPng(const std::string &file_path)
     std::vector<unsigned char> out;
     unsigned long width, height;
 
-    if(!IOManager::readFileToBuffer(file_path, in))
+    if(!IoManager::readFileToBuffer(file_path, in))
 	throw std::runtime_error("Failed to load '"+file_path+"' to buffer");
 
     int error_code = decodePNG(out, width, height, &in[0], in.size());

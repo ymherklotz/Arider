@@ -25,13 +25,15 @@ configure_file (
 
 # adding my executable
 add_executable(${PROJECT_NAME}
-  src/arider.cpp
+  src/main.cpp
   src/game.cpp
   src/glsl_program.cpp
   src/image_loader.cpp
   src/io_manager.cpp
   src/pico_png.cpp
-  src/sprite.cpp)
+  src/sprite.cpp
+  src/resource_manager.cpp
+  src/texture_cache.cpp)
 
 # adding sdl2 library
 include(FindPkgConfig)

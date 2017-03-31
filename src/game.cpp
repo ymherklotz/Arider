@@ -1,5 +1,4 @@
 #include "game.hpp"
-#include "image_loader.hpp"
 #include "sprite.hpp"
 
 #include <stdexcept>
@@ -18,6 +17,8 @@ void Game::initSystems()
     if(SDL_Init(SDL_INIT_VIDEO))
 	throw std::runtime_error("SDL_Init failed");
 
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
     window_ = SDL_CreateWindow("Arider", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 			       width_, height_, SDL_WINDOW_OPENGL);
     if(window_ == nullptr)
@@ -31,7 +32,6 @@ void Game::initSystems()
     if(error != GLEW_OK)
 	throw std::runtime_error("glewInit failed");
 
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     glClearColor(0.f, 0.f, 0.f, 1.f);
 
     initShaders();
@@ -78,7 +78,6 @@ void Game::drawGame()
     
     program_.use();
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, player_texture_.id);
     
     GLint texture_location = program_.getUniformLocation("sampler");
     glUniform1i(texture_location, 0);
@@ -86,7 +85,8 @@ void Game::drawGame()
     GLint time_location = program_.getUniformLocation("time");
     glUniform1f(time_location, time_);
     
-    sprite_.draw();
+    for(auto sprite : sprites_)
+	sprite->draw();
 
     glBindTexture(GL_TEXTURE_2D, 0);
     program_.unuse();
@@ -98,9 +98,13 @@ void Game::drawGame()
 void Game::run()
 {
     initSystems();
-
-    sprite_.init(-1.f, -1.f, 2.f, 2.f);
-    player_texture_ = ImageLoader::loadPng("res/platformer_png/Player/p1_front.png");
-    
+    sprites_.push_back(std::make_shared<Sprite>());
+    sprites_.back()->init(-1.f, -1.f, 1.f, 1.f, "res/platformer_png/Player/p1_stand.png");
+    sprites_.push_back(std::make_shared<Sprite>());
+    sprites_.back()->init(0.f, -1.f, 1.f, 1.f, "res/platformer_png/Player/p1_jump.png");
+    sprites_.push_back(std::make_shared<Sprite>());
+    sprites_.back()->init(0.f, 0.f, 1.f, 1.f, "res/platformer_png/Player/p1_hurt.png");
+    sprites_.push_back(std::make_shared<Sprite>());
+    sprites_.back()->init(-1.f, 0.f, 1.f, 1.f, "res/platformer_png/Player/p1_duck.png");    
     gameLoop();
 }

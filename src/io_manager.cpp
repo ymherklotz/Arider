@@ -3,7 +3,7 @@
 #include <fstream>
 #include <stdexcept>
 
-bool IOManager::readFileToBuffer(const std::string &file_path, std::vector<unsigned char> &buffer)
+bool IoManager::readFileToBuffer(const std::string &file_path, std::vector<unsigned char> &buffer)
 {
     std::ifstream file(file_path, std::ios::binary);
     if(!file.is_open())

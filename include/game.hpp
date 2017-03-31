@@ -5,8 +5,11 @@
 #include "gl_texture.hpp"
 #include "sprite.hpp"
 
-#include <SDL2/SDL.h>
 #include <GL/glew.h>
+#include <SDL2/SDL.h>
+
+#include <memory>
+#include <vector>
 
 enum class GameState
 {
@@ -25,8 +28,7 @@ private:
 
     // Temporary program
     GlslProgram program_;
-    GlTexture player_texture_;
-    Sprite sprite_;
+    std::vector<std::shared_ptr<Sprite>> sprites_;
 
     void initSystems();
     void initShaders();
