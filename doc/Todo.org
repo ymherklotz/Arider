@@ -1,0 +1,7 @@
+#+TITLE: TODO list
+#+AUTHOR: Yann Herklotz
+#+DATE: <2017-03-30 Thu>
+
+** TODO Fix shader to display rectangle
+
+   I have to fix the shader to display a rectangle.

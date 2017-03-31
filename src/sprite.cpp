@@ -1,4 +1,7 @@
 #include "sprite.hpp"
+#include "vertex.hpp"
+
+#include <cstddef>
 
 Sprite::Sprite()
 {}
@@ -17,29 +20,33 @@ void Sprite::init(float x, float y, float width, float height)
     height_ = height;
 
     if(vbo_id_ == 0)
-    {
 	glGenBuffers(1, &vbo_id_);
-    }
 
-    float vertex_data[12];
+    Vertex vertex_data[6];
 
-    vertex_data[0] = x+width;
-    vertex_data[1] = y+height;
+    vertex_data[0].setPosition(x+width, y+height);
+    vertex_data[0].setUv(1.f, 1.f);
 
-    vertex_data[2] = x;
-    vertex_data[3] = y+height;
+    vertex_data[1].setPosition(x, y+height);
+    vertex_data[1].setUv(0.f, 1.f);
 
-    vertex_data[4] = x;
-    vertex_data[5] = y;
+    vertex_data[2].setPosition(x, y);
+    vertex_data[2].setUv(0.f, 0.f);
 
-    vertex_data[6] = x+width;
-    vertex_data[7] = y;
+    vertex_data[3].setPosition(x, y);
+    vertex_data[3].setUv(0.f, 0.f);
 
-    vertex_data[8] = x;
-    vertex_data[9] = y;
+    vertex_data[4].setPosition(x+width, y+height);
+    vertex_data[4].setUv(1.f, 1.f);
 
-    vertex_data[10] = x+width;
-    vertex_data[11] = y+height;
+    vertex_data[5].setPosition(x+width, y);
+    vertex_data[5].setUv(1.f, 0.f);
+
+    for(int i = 0; i < 6; ++i)
+	vertex_data[i].setColor(255, 0, 255, 255);
+
+    vertex_data[1].setColor(0, 255, 255, 255);
+    vertex_data[4].setColor(255, 0, 0, 255);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo_id_);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_data), vertex_data, GL_STATIC_DRAW);
@@ -51,7 +58,9 @@ void Sprite::draw()
     glBindBuffer(GL_ARRAY_BUFFER, vbo_id_);
     glEnableVertexAttribArray(0);
 
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, position));
+    glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void *)offsetof(Vertex, color));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, uv));
     glDrawArrays(GL_TRIANGLES, 0, 6);
     
     glDisableVertexAttribArray(0);

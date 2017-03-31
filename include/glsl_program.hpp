@@ -10,6 +10,7 @@ private:
     GLuint program_id_ = 0;
     GLuint vertex_shader_id_ = 0;
     GLuint fragment_shader_id_ = 0;
+    int attribute_index_ = 0;
 
     void compileShader(const GLuint &shader, const std::string &file_path);
 public:
@@ -18,6 +19,10 @@ public:
 
     void compileShaders(const std::string &vertex_shader_path, const std::string &fragment_shader_path);
     void linkShaders();
+    void addAttribute(const std::string &attribute_name);
+    GLint getUniformLocation(const std::string &uniform_name);
+    void use();
+    void unuse();
 };
 
 

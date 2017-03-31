@@ -177,6 +177,114 @@ src/game.cpp.s:
 	$(MAKE) -f CMakeFiles/arider.dir/build.make CMakeFiles/arider.dir/src/game.cpp.s
 .PHONY : src/game.cpp.s
 
+src/glsl_program.o: src/glsl_program.cpp.o
+
+.PHONY : src/glsl_program.o
+
+# target to build an object file
+src/glsl_program.cpp.o:
+	$(MAKE) -f CMakeFiles/arider.dir/build.make CMakeFiles/arider.dir/src/glsl_program.cpp.o
+.PHONY : src/glsl_program.cpp.o
+
+src/glsl_program.i: src/glsl_program.cpp.i
+
+.PHONY : src/glsl_program.i
+
+# target to preprocess a source file
+src/glsl_program.cpp.i:
+	$(MAKE) -f CMakeFiles/arider.dir/build.make CMakeFiles/arider.dir/src/glsl_program.cpp.i
+.PHONY : src/glsl_program.cpp.i
+
+src/glsl_program.s: src/glsl_program.cpp.s
+
+.PHONY : src/glsl_program.s
+
+# target to generate assembly for a file
+src/glsl_program.cpp.s:
+	$(MAKE) -f CMakeFiles/arider.dir/build.make CMakeFiles/arider.dir/src/glsl_program.cpp.s
+.PHONY : src/glsl_program.cpp.s
+
+src/image_loader.o: src/image_loader.cpp.o
+
+.PHONY : src/image_loader.o
+
+# target to build an object file
+src/image_loader.cpp.o:
+	$(MAKE) -f CMakeFiles/arider.dir/build.make CMakeFiles/arider.dir/src/image_loader.cpp.o
+.PHONY : src/image_loader.cpp.o
+
+src/image_loader.i: src/image_loader.cpp.i
+
+.PHONY : src/image_loader.i
+
+# target to preprocess a source file
+src/image_loader.cpp.i:
+	$(MAKE) -f CMakeFiles/arider.dir/build.make CMakeFiles/arider.dir/src/image_loader.cpp.i
+.PHONY : src/image_loader.cpp.i
+
+src/image_loader.s: src/image_loader.cpp.s
+
+.PHONY : src/image_loader.s
+
+# target to generate assembly for a file
+src/image_loader.cpp.s:
+	$(MAKE) -f CMakeFiles/arider.dir/build.make CMakeFiles/arider.dir/src/image_loader.cpp.s
+.PHONY : src/image_loader.cpp.s
+
+src/io_manager.o: src/io_manager.cpp.o
+
+.PHONY : src/io_manager.o
+
+# target to build an object file
+src/io_manager.cpp.o:
+	$(MAKE) -f CMakeFiles/arider.dir/build.make CMakeFiles/arider.dir/src/io_manager.cpp.o
+.PHONY : src/io_manager.cpp.o
+
+src/io_manager.i: src/io_manager.cpp.i
+
+.PHONY : src/io_manager.i
+
+# target to preprocess a source file
+src/io_manager.cpp.i:
+	$(MAKE) -f CMakeFiles/arider.dir/build.make CMakeFiles/arider.dir/src/io_manager.cpp.i
+.PHONY : src/io_manager.cpp.i
+
+src/io_manager.s: src/io_manager.cpp.s
+
+.PHONY : src/io_manager.s
+
+# target to generate assembly for a file
+src/io_manager.cpp.s:
+	$(MAKE) -f CMakeFiles/arider.dir/build.make CMakeFiles/arider.dir/src/io_manager.cpp.s
+.PHONY : src/io_manager.cpp.s
+
+src/pico_png.o: src/pico_png.cpp.o
+
+.PHONY : src/pico_png.o
+
+# target to build an object file
+src/pico_png.cpp.o:
+	$(MAKE) -f CMakeFiles/arider.dir/build.make CMakeFiles/arider.dir/src/pico_png.cpp.o
+.PHONY : src/pico_png.cpp.o
+
+src/pico_png.i: src/pico_png.cpp.i
+
+.PHONY : src/pico_png.i
+
+# target to preprocess a source file
+src/pico_png.cpp.i:
+	$(MAKE) -f CMakeFiles/arider.dir/build.make CMakeFiles/arider.dir/src/pico_png.cpp.i
+.PHONY : src/pico_png.cpp.i
+
+src/pico_png.s: src/pico_png.cpp.s
+
+.PHONY : src/pico_png.s
+
+# target to generate assembly for a file
+src/pico_png.cpp.s:
+	$(MAKE) -f CMakeFiles/arider.dir/build.make CMakeFiles/arider.dir/src/pico_png.cpp.s
+.PHONY : src/pico_png.cpp.s
+
 src/sprite.o: src/sprite.cpp.o
 
 .PHONY : src/sprite.o
@@ -219,6 +327,18 @@ help:
 	@echo "... src/game.o"
 	@echo "... src/game.i"
 	@echo "... src/game.s"
+	@echo "... src/glsl_program.o"
+	@echo "... src/glsl_program.i"
+	@echo "... src/glsl_program.s"
+	@echo "... src/image_loader.o"
+	@echo "... src/image_loader.i"
+	@echo "... src/image_loader.s"
+	@echo "... src/io_manager.o"
+	@echo "... src/io_manager.i"
+	@echo "... src/io_manager.s"
+	@echo "... src/pico_png.o"
+	@echo "... src/pico_png.i"
+	@echo "... src/pico_png.s"
 	@echo "... src/sprite.o"
 	@echo "... src/sprite.i"
 	@echo "... src/sprite.s"
