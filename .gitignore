@@ -11,3 +11,6 @@ CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
 Makefile
+
+# specific directories to ignore
+/debug_build/
