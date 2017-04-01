@@ -1,9 +1,11 @@
 #include "arider_config.hpp"
 #include "game.hpp"
+#include "logger.hpp"
+
+#include <GL/glew.h>
 
 #include <exception>
 #include <iostream>
-#include <SDL2/SDL.h>
 
 int main()
 {

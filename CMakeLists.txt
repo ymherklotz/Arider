@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 project(arider)
 
 # set version number
@@ -6,34 +6,31 @@ set(ARIDER_MAJOR_VERSION 0)
 set(ARIDER_MINOR_VERSION 1)
 set(ARIDER_PATCH_VERSION 0)
 set(ARIDER_VERSION
-  ${ARIDER_MAJOR_VERSION}.${ARIDER_MINOR_VERSION}.${ARIDER_PATCH_VERSION})
+  ${ARIDER_MAJOR_VERSION}.${ARIDERn_MINOR_VERSION}.${ARIDER_PATCH_VERSION})
 
 # set standard
 set(CMAKE_CXX_STANDARD 14)
 
 # set include directories
-set(ARIDER_INCLUDE_DIR "include/")
+set(ARIDER_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include)
 
 # setting right output directory
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "bin/")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+
+
+set(ZEDENGINE_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/zedengine/include/)
+set(ZEDENGINE_LIBRARIES zedengine)
 
 # setting up configuration header
 configure_file (
-  "config/arider_config.hpp.in"
-  "include/arider_config.hpp"
+  ${CMAKE_SOURCE_DIR}/config/arider_config.hpp.in
+  ${CMAKE_SOURCE_DIR}/include/arider_config.hpp
   )
 
 # adding my executable
 add_executable(${PROJECT_NAME}
-  src/main.cpp
-  src/game.cpp
-  src/glsl_program.cpp
-  src/image_loader.cpp
-  src/io_manager.cpp
-  src/pico_png.cpp
-  src/sprite.cpp
-  src/resource_manager.cpp
-  src/texture_cache.cpp)
+  ${CMAKE_SOURCE_DIR}/src/game.cpp
+  ${CMAKE_SOURCE_DIR}/src/main.cpp)
 
 # adding sdl2 library
 include(FindPkgConfig)
@@ -41,14 +38,19 @@ find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 pkg_search_module(SDL2 REQUIRED sdl2)
 
+# add zedengine library
+add_subdirectory(zedengine)
+
 # adding include directories
-include_directories(${ARIDER_INCLUDE_DIR}
+include_directories(${ARIDER_INCLUDE_DIRS}
+  ${ZEDENGINE_INCLUDE_DIRS}
   ${OPENGL_INCLUDE_DIRS}
   ${GLEW_INCLUDE_DIRS}
-  ${SDL2_INCLUDE_DIRS})
+  ${SLD2_INCLUDE_DIRS})
 
 # link libraries
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(${CMAKE_PROJECT_NAME}
+  ${ZEDENGINE_LIBRARIES}
   ${OPENGL_LIBRARIES}
   ${GLEW_LIBRARIES}
   ${SDL2_LIBRARIES})

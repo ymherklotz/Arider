@@ -6,6 +6,7 @@ CMakeFiles/
 # extensions to ignore
 *.o
 *.out
+*.a
 
 # general files to ignore
 CMakeCache.txt

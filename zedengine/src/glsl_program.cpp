@@ -118,7 +118,7 @@ void GlslProgram::addAttribute(const std::string &attribute_name)
 GLint GlslProgram::getUniformLocation(const std::string &uniform_name)
 {
     GLint location = glGetUniformLocation(program_id_, uniform_name.c_str());
-    if(location == GL_INVALID_INDEX)
+    if((GLuint)location == GL_INVALID_INDEX)
 	throw std::runtime_error("'"+uniform_name+"' not found");
     return location;
 }

@@ -35,6 +35,7 @@ private:
     void processInput();
     void gameLoop();
     void drawGame();
+    float calculateFps();
 public:
     Game();
     ~Game();
