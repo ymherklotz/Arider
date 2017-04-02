@@ -18,8 +18,8 @@ set(ARIDER_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 
-set(ZEDENGINE_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/zedengine/include/)
-set(ZEDENGINE_LIBRARIES zedengine)
+set(YAGE_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/yage/include/)
+set(YAGE_LIBRARIES yage)
 
 # setting up configuration header
 configure_file (
@@ -39,18 +39,18 @@ find_package(GLEW REQUIRED)
 pkg_search_module(SDL2 REQUIRED sdl2)
 
 # add zedengine library
-add_subdirectory(zedengine)
+add_subdirectory(yage)
 
 # adding include directories
 include_directories(${ARIDER_INCLUDE_DIRS}
-  ${ZEDENGINE_INCLUDE_DIRS}
+  ${YAGE_INCLUDE_DIRS}
   ${OPENGL_INCLUDE_DIRS}
   ${GLEW_INCLUDE_DIRS}
   ${SLD2_INCLUDE_DIRS})
 
 # link libraries
 target_link_libraries(${CMAKE_PROJECT_NAME}
-  ${ZEDENGINE_LIBRARIES}
+  ${YAGE_LIBRARIES}
   ${OPENGL_LIBRARIES}
   ${GLEW_LIBRARIES}
   ${SDL2_LIBRARIES})

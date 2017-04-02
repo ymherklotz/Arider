@@ -1,9 +1,9 @@
 # zedengine library cmakelists.txt
 
-project(zedengine)
+project(yage)
 
 # add sources to library
-set(ZEDENGINE_SOURCES ${PROJECT_SOURCE_DIR}/src/glsl_program.cpp
+set(YAGE_SOURCES ${PROJECT_SOURCE_DIR}/src/glsl_program.cpp
   ${PROJECT_SOURCE_DIR}/src/image_loader.cpp
   ${PROJECT_SOURCE_DIR}/src/io_manager.cpp
   ${PROJECT_SOURCE_DIR}/src/pico_png.cpp
@@ -12,7 +12,7 @@ set(ZEDENGINE_SOURCES ${PROJECT_SOURCE_DIR}/src/glsl_program.cpp
   ${PROJECT_SOURCE_DIR}/src/texture_cache.cpp)
 
 # set include directory
-include_directories(${ZEDENGINE_INCLUDE_DIRS})
+include_directories(${YAGE_INCLUDE_DIRS}/yage/)
 
 # make it a static library
-add_library(${PROJECT_NAME} ${ZEDENGINE_SOURCES})
+add_library(${PROJECT_NAME} ${YAGE_SOURCES})

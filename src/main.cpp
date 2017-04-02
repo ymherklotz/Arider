@@ -1,6 +1,5 @@
 #include "arider_config.hpp"
 #include "game.hpp"
-#include "logger.hpp"
 
 #include <GL/glew.h>
 

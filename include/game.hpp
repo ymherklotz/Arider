@@ -1,12 +1,11 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "glsl_program.hpp"
-#include "gl_texture.hpp"
-#include "sprite.hpp"
-
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
+#include <yage/glsl_program.hpp>
+#include <yage/gl_texture.hpp>
+#include <yage/sprite.hpp>
 
 #include <memory>
 #include <vector>
