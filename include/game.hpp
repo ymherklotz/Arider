@@ -1,14 +1,11 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include <GL/glew.h>
-#include <SDL2/SDL.h>
-#include <glm/glm.hpp>
-
-#include <YAGE/glslprogram.hpp>
 #include <YAGE/camera2d.hpp>
+#include <YAGE/glslprogram.hpp>
 #include <YAGE/gltexture.hpp>
-#include <YAGE/sprite.hpp>
+#include <YAGE/inputmanager.hpp>
+#include <YAGE/spritebatch.hpp>
 #include <YAGE/window.hpp>
 
 #include <memory>
@@ -22,7 +19,7 @@ enum class GameState
 
 class Game
 {
-public: // member variables
+    // member variables
 private:
     // screen width and height initialized in constructor
     int screen_width_;
@@ -37,9 +34,13 @@ private:
     yage::Camera2D camera_;
     // temporary program
     yage::GlslProgram program_;
-    std::vector<std::shared_ptr<yage::Sprite>> sprites_;
+    // sprites
+    yage::SpriteBatch sprite_batch_;
+    // input manager
+    yage::InputManager input_manager_;
 
-public: // member functions
+    // member functions    
+public: 
     Game(int screen_width=1280, int screen_height=720);
     ~Game();
 

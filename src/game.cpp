@@ -1,6 +1,12 @@
 #include "game.hpp"
 
-#include <YAGE/sprite.hpp>
+#include <GL/glew.h>
+#include <glm/glm.hpp>
+#include <SDL2/SDL.h>
+
+#include <YAGE/gltexture.hpp>
+#include <YAGE/resourcemanager.hpp>
+#include <YAGE/vertex.hpp>
 
 #include <stdexcept>
 #include <iostream>
@@ -8,7 +14,10 @@
 Game::Game(int screen_width/*=1280*/, int screen_height/*=720*/) :
     screen_width_(screen_width),
     screen_height_(screen_height),
-    camera_(screen_width_, screen_height_)
+    window_(),
+    camera_(screen_width_, screen_height_),
+    program_(),
+    sprite_batch_()
 {}
 
 Game::~Game()
@@ -19,13 +28,7 @@ Game::~Game()
 void Game::run()
 {
     initSystems();
-    sprites_.push_back(std::make_shared<yage::Sprite>());
-    sprites_.back()->init(0.f, 0.f, 66.f, 92.f, "res/platformer_png/Player/p1_stand.png");
-    sprites_.push_back(std::make_shared<yage::Sprite>());
-    sprites_.back()->init(100.f, 0.f, 66.f, 92.f, "res/platformer_png/Player/p2_jump.png");
-    sprites_.push_back(std::make_shared<yage::Sprite>());
-    sprites_.back()->init(200.f, 0.f, 66.f, 92.f, "res/platformer_png/Player/p3_jump.png");
-    
+    sprite_batch_.init();
     gameLoop();
 }
 
@@ -52,8 +55,8 @@ void Game::processInput()
 {
     SDL_Event event;
 
-    static const float CAMERA_SPEED = 20.f;
-    static const float SCALE_SPEED = 0.1f;
+    static const float CAMERA_SPEED = 5.f;
+    // static const float SCALE_SPEED = 0.1f;
 
     while(SDL_PollEvent(&event))
     {
@@ -66,10 +69,21 @@ void Game::processInput()
 	    // when mouse moves
 	    break;
 	case SDL_KEYDOWN:
-
+	    input_manager_.keyPressed(event.key.keysym.sym);
 	    break;
+	case SDL_KEYUP:
+	    input_manager_.keyReleased(event.key.keysym.sym);
 	}
     }
+
+    if(input_manager_.isKeyPressed(SDLK_w))
+	camera_.move(glm::vec2(0, CAMERA_SPEED));
+    if(input_manager_.isKeyPressed(SDLK_d))
+	camera_.move(glm::vec2(CAMERA_SPEED, 0));
+    if(input_manager_.isKeyPressed(SDLK_s))
+	camera_.move(glm::vec2(0, -CAMERA_SPEED));
+    if(input_manager_.isKeyPressed(SDLK_a))
+	camera_.move(glm::vec2(-CAMERA_SPEED, 0));    
 }
 
 void Game::gameLoop()
@@ -85,14 +99,12 @@ void Game::gameLoop()
 
 void Game::drawGame()
 {
-    glClearDepth(1.0);
-    // clears buffer with clear color
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    window_.clearBuffer();
     
     program_.use();
     camera_.update();
-    glActiveTexture(GL_TEXTURE0);
     
+    glActiveTexture(GL_TEXTURE0);   
     GLint texture_location = program_.getUniformLocation("texture_sampler");
     glUniform1i(texture_location, 0);
 
@@ -102,8 +114,20 @@ void Game::drawGame()
     GLint matrix_location = program_.getUniformLocation("P");
     glUniformMatrix4fv(matrix_location, 1, GL_FALSE, &(camera_.getCameraMatrix()[0][0]));
     
-    for(auto sprite : sprites_)
-	sprite->draw();
+    // draw the sprite batches
+    sprite_batch_.begin();
+
+    glm::vec4 rect(200.f, 200.f, 66.f, 92.f);
+    glm::vec4 uv(0.f, 0.f, 1.f, 1.f);
+    yage::GlTexture texture=yage::ResourceManager::getTexture("res/platformer_png/Player/p1_front.png");
+    yage::Color color;
+    color.r=255;
+    color.g=255;
+    color.b=255;
+    color.a=255;
+    sprite_batch_.draw(rect, uv, texture.id, color, 0.f);
+    sprite_batch_.end();
+    sprite_batch_.render();
 
     glBindTexture(GL_TEXTURE_2D, 0);
     program_.unuse();
