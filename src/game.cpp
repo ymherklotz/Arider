@@ -1,23 +1,40 @@
 #include "game.hpp"
 
-#include <yage/sprite.hpp>
+#include <YAGE/sprite.hpp>
 
 #include <stdexcept>
 #include <iostream>
 
-Game::Game() 
+Game::Game(int screen_width/*=1280*/, int screen_height/*=720*/) :
+    screen_width_(screen_width),
+    screen_height_(screen_height),
+    camera_(screen_width_, screen_height_)
 {}
 
 Game::~Game()
 {
-    SDL_DestroyWindow(window_);
     SDL_Quit();
+}
+
+void Game::run()
+{
+    initSystems();
+    sprites_.push_back(std::make_shared<yage::Sprite>());
+    sprites_.back()->init(0.f, 0.f, 66.f, 92.f, "res/platformer_png/Player/p1_stand.png");
+    sprites_.push_back(std::make_shared<yage::Sprite>());
+    sprites_.back()->init(100.f, 0.f, 66.f, 92.f, "res/platformer_png/Player/p2_jump.png");
+    sprites_.push_back(std::make_shared<yage::Sprite>());
+    sprites_.back()->init(200.f, 0.f, 66.f, 92.f, "res/platformer_png/Player/p3_jump.png");
+    
+    gameLoop();
 }
 
 void Game::initSystems()
 {
     if(SDL_Init(SDL_INIT_VIDEO))
 	throw std::runtime_error("SDL_Init failed");
+
+    window_.create("Arider", screen_width_, screen_height_, yage::WindowFlags::SHOWN);
 
     initShaders();
 }
@@ -35,12 +52,22 @@ void Game::processInput()
 {
     SDL_Event event;
 
+    static const float CAMERA_SPEED = 20.f;
+    static const float SCALE_SPEED = 0.1f;
+
     while(SDL_PollEvent(&event))
     {
 	switch(event.type)
 	{
 	case SDL_QUIT:
 	    game_state_ = GameState::EXIT;
+	    break;
+	case SDL_MOUSEMOTION:
+	    // when mouse moves
+	    break;
+	case SDL_KEYDOWN:
+
+	    break;
 	}
     }
 }
@@ -63,13 +90,17 @@ void Game::drawGame()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     program_.use();
+    camera_.update();
     glActiveTexture(GL_TEXTURE0);
     
     GLint texture_location = program_.getUniformLocation("texture_sampler");
     glUniform1i(texture_location, 0);
 
-    GLint time_location = program_.getUniformLocation("time");
-    glUniform1f(time_location, time_);
+    // GLint time_location = program_.getUniformLocation("time");
+    // glUniform1f(time_location, time_);
+
+    GLint matrix_location = program_.getUniformLocation("P");
+    glUniformMatrix4fv(matrix_location, 1, GL_FALSE, &(camera_.getCameraMatrix()[0][0]));
     
     for(auto sprite : sprites_)
 	sprite->draw();
@@ -78,21 +109,7 @@ void Game::drawGame()
     program_.unuse();
 
     // swap buffer and draw everything to the screen
-    SDL_GL_SwapWindow(window_);
-}
-
-void Game::run()
-{
-    initSystems();
-    sprites_.push_back(std::make_shared<Sprite>());
-    sprites_.back()->init(-1.f, -1.f, 1.f, 1.f, "res/platformer_png/Player/p1_stand.png");
-    sprites_.push_back(std::make_shared<Sprite>());
-    sprites_.back()->init(0.f, -1.f, 1.f, 1.f, "res/platformer_png/Player/p1_jump.png");
-    sprites_.push_back(std::make_shared<Sprite>());
-    sprites_.back()->init(0.f, 0.f, 1.f, 1.f, "res/platformer_png/Player/p1_hurt.png");
-    sprites_.push_back(std::make_shared<Sprite>());
-    sprites_.back()->init(-1.f, 0.f, 1.f, 1.f, "res/platformer_png/Player/p1_duck.png");    
-    gameLoop();
+    window_.swapBuffer();
 }
 
 float Game::calculateFps()

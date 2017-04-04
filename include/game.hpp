@@ -3,9 +3,13 @@
 
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
-#include <yage/glsl_program.hpp>
-#include <yage/gl_texture.hpp>
-#include <yage/sprite.hpp>
+#include <glm/glm.hpp>
+
+#include <YAGE/glslprogram.hpp>
+#include <YAGE/camera2d.hpp>
+#include <YAGE/gltexture.hpp>
+#include <YAGE/sprite.hpp>
+#include <YAGE/window.hpp>
 
 #include <memory>
 #include <vector>
@@ -18,28 +22,35 @@ enum class GameState
 
 class Game
 {
+public: // member variables
 private:
-    SDL_Window *window_ = nullptr;
-    int width_ = 1280;
-    int height_ = 720;
-    GameState game_state_ = GameState::PLAY;
-    float time_ = 0;
+    // screen width and height initialized in constructor
+    int screen_width_;
+    int screen_height_;
+    // initializer game state
+    GameState game_state_=GameState::PLAY;
+    // set timer to 0
+    float time_=0;
+    // window
+    yage::Window window_;
+    // camera
+    yage::Camera2D camera_;
+    // temporary program
+    yage::GlslProgram program_;
+    std::vector<std::shared_ptr<yage::Sprite>> sprites_;
 
-    // Temporary program
-    GlslProgram program_;
-    std::vector<std::shared_ptr<Sprite>> sprites_;
+public: // member functions
+    Game(int screen_width=1280, int screen_height=720);
+    ~Game();
 
+    void run();
+private:
     void initSystems();
     void initShaders();
     void processInput();
     void gameLoop();
     void drawGame();
     float calculateFps();
-public:
-    Game();
-    ~Game();
-
-    void run();
 };
 
 #endif
