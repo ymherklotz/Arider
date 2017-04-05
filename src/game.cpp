@@ -119,7 +119,7 @@ void Game::drawGame()
 
     glm::vec4 rect(200.f, 200.f, 66.f, 92.f);
     glm::vec4 uv(0.f, 0.f, 1.f, 1.f);
-    yage::GlTexture texture=yage::ResourceManager::getTexture("res/platformer_png/Player/p1_front.png");
+    yage::GlTexture texture=yage::ResourceManager::getTexture("res/textures/Player/p1_front.png");
     yage::Color color;
     color.r=255;
     color.g=255;
