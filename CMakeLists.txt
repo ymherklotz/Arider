@@ -23,14 +23,17 @@ set(YAGE_LIBRARIES YAGE)
 
 # setting up configuration header
 configure_file (
-  ${CMAKE_SOURCE_DIR}/config/arider_config.hpp.in
-  ${CMAKE_SOURCE_DIR}/include/arider_config.hpp
+  ${CMAKE_SOURCE_DIR}/config/ariderconfig.hpp.in
+  ${CMAKE_SOURCE_DIR}/include/ariderconfig.hpp
   )
 
 # adding my executable
 add_executable(${PROJECT_NAME}
+  ${CMAKE_SOURCE_DIR}/src/animation.cpp
+  ${CMAKE_SOURCE_DIR}/src/character.cpp  
   ${CMAKE_SOURCE_DIR}/src/game.cpp
-  ${CMAKE_SOURCE_DIR}/src/main.cpp)
+  ${CMAKE_SOURCE_DIR}/src/main.cpp
+  ${CMAKE_SOURCE_DIR}/src/player.cpp)
 
 # adding sdl2 library
 include(FindPkgConfig)

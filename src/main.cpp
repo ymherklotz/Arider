@@ -1,4 +1,4 @@
-#include "arider_config.hpp"
+#include "ariderconfig.hpp"
 #include "game.hpp"
 
 #include <GL/glew.h>

@@ -1,9 +1,11 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+#include "player.hpp"
+
 #include <YAGE/camera2d.hpp>
 #include <YAGE/glslprogram.hpp>
-#include <YAGE/gltexture.hpp>
+#include <YAGE/texture.hpp>
 #include <YAGE/inputmanager.hpp>
 #include <YAGE/spritebatch.hpp>
 #include <YAGE/window.hpp>
@@ -27,7 +29,7 @@ private:
     // initializer game state
     GameState game_state_=GameState::PLAY;
     // set timer to 0
-    float time_=0;
+    int time_=0;
     // window
     yage::Window window_;
     // camera
@@ -38,6 +40,8 @@ private:
     yage::SpriteBatch sprite_batch_;
     // input manager
     yage::InputManager input_manager_;
+    // player
+    Player player_;
 
     // member functions    
 public: 
@@ -51,6 +55,7 @@ private:
     void processInput();
     void gameLoop();
     void drawGame();
+    void renderSprites();
     float calculateFps();
 };
 
