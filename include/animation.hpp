@@ -10,31 +10,39 @@
 #include <unordered_map>
 #include <vector>
 
+enum class AnimationState
+{
+    IDLE,
+    MOVING,
+    JUMPING,
+    CROUCHING,
+};
+
 class Animation
 {
 private:
-    std::unordered_map<std::string, std::vector<yage::Texture>> frame_animations_;
-    std::string current_animation_;
+    std::unordered_map<AnimationState, std::vector<yage::Texture>> frame_animations_;
+    AnimationState current_animation_;
     int current_index_=0;
 public:
-    Animation() {}
+    Animation();
 
-    void pushFrame(const std::string &animation_name, const std::string &texture_path);
+    void pushFrame(AnimationState state, const std::string &texture_path);
     yage::Texture currentFrame() const;
-    void start(const std::string &animation_name);
+    void start(AnimationState state);
     void nextFrame();
 
     template<typename First, typename Second, typename ...Rest>
-    void initializeAnimation(const std::string &animation_name, First &&first, Second &&second, Rest &&...rest)
+    void initializeAnimation(AnimationState state, First &&first, Second &&second, Rest &&...rest)
     {
-	frame_animations_[animation_name].push_back(yage::ResourceManager::getTexture(std::forward<First>(first)));
+	frame_animations_[state].push_back(yage::ResourceManager::getTexture(std::forward<First>(first)));
 	initializeAnimation(std::forward<Second>(second), std::forward<Rest>(rest)...);
     }
 
     template<typename Last>
-    void initializeAnimation(const std::string &animation_name, Last &&last)
+    void initializeAnimation(AnimationState state, Last &&last)
     {
-	frame_animations_[animation_name].push_back(yage::ResourceManager::getTexture(std::forward<Last>(last)));
+	frame_animations_[state].push_back(yage::ResourceManager::getTexture(std::forward<Last>(last)));
     }
 };
 

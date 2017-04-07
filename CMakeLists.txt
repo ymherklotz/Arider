@@ -32,6 +32,7 @@ add_executable(${PROJECT_NAME}
   ${CMAKE_SOURCE_DIR}/src/animation.cpp
   ${CMAKE_SOURCE_DIR}/src/character.cpp  
   ${CMAKE_SOURCE_DIR}/src/game.cpp
+  ${CMAKE_SOURCE_DIR}/src/levelloader.cpp
   ${CMAKE_SOURCE_DIR}/src/main.cpp
   ${CMAKE_SOURCE_DIR}/src/player.cpp)
 

@@ -37,19 +37,13 @@ void Game::initSystems()
     window_.create("Arider", screen_width_, screen_height_, yage::WindowFlags::SHOWN);
     initShaders();
 
-    player_.create(glm::vec2(0.f, 0.f), glm::vec2(66, 92), glm::vec2(5.f, 5.f));
-    player_.animation_.pushFrame("idle", "res/textures/Player/p3_front.png");
+    player_.create(glm::vec2(0.f, 70.f), glm::vec2(66, 92), glm::vec2(5.f, 5.f));
+    player_.animation_.pushFrame(AnimationState::IDLE, "res/textures/Player/p3_front.png");
     for(int i=1; i<=11; ++i)
-    {
 	if(i<10)
-	{
-	    player_.animation_.pushFrame("move", "res/textures/Player/p3_walk/PNG/p3_walk0"+std::to_string(i)+".png");
-	}
+	    player_.animation_.pushFrame(AnimationState::MOVING, "res/textures/Player/p3_walk/PNG/p3_walk0"+std::to_string(i)+".png");
 	else
-	{
-	    player_.animation_.pushFrame("move", "res/textures/Player/p3_walk/PNG/p3_walk"+std::to_string(i)+".png");
-	}
-    }
+	    player_.animation_.pushFrame(AnimationState::MOVING, "res/textures/Player/p3_walk/PNG/p3_walk"+std::to_string(i)+".png");
 }
 
 void Game::initShaders()
@@ -80,29 +74,16 @@ void Game::processInput()
 	}
     }
 
-    player_.animation_.start("idle");
     player_.idle();
 
     if(input_manager_.isKeyPressed(SDLK_w))
-    {	
-	player_.animation_.start("idle");
 	player_.moveUp();
-    }
     if(input_manager_.isKeyPressed(SDLK_s))
-    {	
-	player_.animation_.start("idle");
 	player_.moveDown();
-    }
     if(input_manager_.isKeyPressed(SDLK_d))
-    {	
-	player_.animation_.start("move");
 	player_.moveRight();
-    }
     if(input_manager_.isKeyPressed(SDLK_a))
-    {
-	player_.animation_.start("move");
 	player_.moveLeft();
-    }
 
     if(time_%3==0)
 	player_.animation_.nextFrame();
@@ -152,8 +133,10 @@ void Game::renderSprites()
     player_.renderSprite(sprite_batch_);
 
     // drawing the background
-    sprite_batch_.draw(glm::vec4(0.f, 0.f, 2560, 2560), glm::vec4(0.f, 0.f, 10.f, 10.f), yage::ResourceManager::getTexture("res/textures/bg_castle.png").id, yage::Color(255, 255, 255, 255), -1.f);
-
+    sprite_batch_.draw(glm::vec4(0.f, 0.f, 2560.f, 2560.f), glm::vec4(0.f, 0.f, 10.f, 10.f), yage::ResourceManager::getTexture("res/textures/bg_castle.png").id, yage::Color(255, 255, 255, 255), -2.f);
+    sprite_batch_.draw(glm::vec4(0.f, 0.f, 700.f, 70.f), glm::vec4(0.f, 0.f, 10.f, 1.f), yage::ResourceManager::getTexture("res/textures/Tiles/grassMid.png").id, yage::Color(255, 255, 255, 255), -1.f);
+    sprite_batch_.draw(glm::vec4(700.f, 0.f, 70.f, 70.f), glm::vec4(0.f, 0.f, 1.f, 1.f), yage::ResourceManager::getTexture("res/textures/Tiles/grassCliffRight.png").id, yage::Color(255, 255, 255, 255), -1.f);
+ 
     sprite_batch_.end();
     sprite_batch_.render();    
 }
