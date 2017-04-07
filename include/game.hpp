@@ -1,6 +1,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+#include "levelloader.hpp"
 #include "player.hpp"
 
 #include <YAGE/camera2d.hpp>
@@ -42,6 +43,8 @@ private:
     yage::InputManager input_manager_;
     // player
     Player player_;
+    //level
+    Level level_;
 
     // member functions    
 public: 

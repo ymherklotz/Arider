@@ -7,10 +7,15 @@
 
 #include <string>
 
-class LevelLoader {
+class Level {
+private:
+    int width_;
+    int height_;
+    std::string level_;
+    
 public:
-    static void loadLevel(const std::string &level_path, std::string &level, int &level_width, int &level_height);
-    static void drawLevel(yage::SpriteBatch &sprite_batch, const std::string &level, int level_width);
+    void loadLevel(const std::string &level_path);
+    void drawLevel(yage::SpriteBatch &sprite_batch);
 };
 
 #endif
