@@ -39,12 +39,12 @@ void Game::initSystems()
     initShaders();
 
     player_.create(glm::vec2(0.f, 70.f), glm::vec2(66, 92), glm::vec2(5.f, 5.f));
-    player_.animation_.pushFrame(AnimationState::IDLE, "res/textures/Player/p3_front.png");
+    player_.animation_.pushFrame(AnimationState::IDLE, "res/textures/Player/p2_front.png");
     for(int i=1; i<=11; ++i)
 	if(i<10)
-	    player_.animation_.pushFrame(AnimationState::MOVING, "res/textures/Player/p3_walk/PNG/p3_walk0"+std::to_string(i)+".png");
+	    player_.animation_.pushFrame(AnimationState::MOVING, "res/textures/Player/p2_walk/PNG/p2_walk0"+std::to_string(i)+".png");
 	else
-	    player_.animation_.pushFrame(AnimationState::MOVING, "res/textures/Player/p3_walk/PNG/p3_walk"+std::to_string(i)+".png");
+	    player_.animation_.pushFrame(AnimationState::MOVING, "res/textures/Player/p2_walk/PNG/p2_walk"+std::to_string(i)+".png");
     level_.loadLevel("res/levels/level1.txt");
 }
 
@@ -134,13 +134,10 @@ void Game::renderSprites()
     level_.drawLevel(sprite_batch_);
 
     // drawing the player
-    // player_.renderSprite(sprite_batch_);
+    player_.renderSprite(sprite_batch_);
 
     // drawing the background
-    // sprite_batch_.draw(glm::vec4(0.f, 0.f, 2560.f, 2560.f), glm::vec4(0.f, 0.f, 10.f, 10.f), yage::ResourceManager::getTexture("res/textures/bg_castle.png").id, yage::Color(255, 255, 255, 255), -2.f);
-    // sprite_batch_.draw(glm::vec4(0.f, 280.f, 700.f, 70.f), glm::vec4(0.f, 0.f, 10.f, 1.f), yage::ResourceManager::getTexture("res/textures/Tiles/grassMid.png").id, yage::Color(255, 255, 255, 255), 0.f);
-    // sprite_batch_.draw(glm::vec4(0.f, 0.f, 700.f, 70.f), glm::vec4(0.f, 0.f, 10.f, 1.f), yage::ResourceManager::getTexture("res/textures/Tiles/grassMid.png").id, yage::Color(255, 255, 255, 255), -1.f);
-    // sprite_batch_.draw(glm::vec4(700.f, 0.f, 70.f, 70.f), glm::vec4(0.f, 0.f, 1.f, 1.f), yage::ResourceManager::getTexture("res/textures/Tiles/grassCliffRight.png").id, yage::Color(255, 255, 255, 255), -1.f);
+    sprite_batch_.draw(glm::vec4(0.f, 0.f, 2560.f, 2560.f), glm::vec4(0.f, 0.f, 10.f, 10.f), yage::ResourceManager::getTexture("res/textures/bg_castle.png").id, yage::Color(255, 255, 255, 255), -2.f);
     
     sprite_batch_.end();
     sprite_batch_.render();    
