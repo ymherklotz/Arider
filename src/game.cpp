@@ -1,6 +1,6 @@
 #include "animation.hpp"
 #include "game.hpp"
-#include "levelloader.hpp"
+#include "level.hpp"
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>

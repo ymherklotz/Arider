@@ -6,7 +6,7 @@ set(ARIDER_MAJOR_VERSION 0)
 set(ARIDER_MINOR_VERSION 1)
 set(ARIDER_PATCH_VERSION 0)
 set(ARIDER_VERSION
-  ${ARIDER_MAJOR_VERSION}.${ARIDERn_MINOR_VERSION}.${ARIDER_PATCH_VERSION})
+  ${ARIDER_MAJOR_VERSION}.${ARIDERn_MINOR_VERSION}${ARIDER_PATCH_VERSION})
 
 # set standard
 set(CMAKE_CXX_STANDARD 14)
@@ -30,9 +30,10 @@ configure_file (
 # adding my executable
 add_executable(${PROJECT_NAME}
   ${CMAKE_SOURCE_DIR}/src/animation.cpp
-  ${CMAKE_SOURCE_DIR}/src/character.cpp  
+  ${CMAKE_SOURCE_DIR}/src/block.cpp  
+  ${CMAKE_SOURCE_DIR}/src/character.cpp
   ${CMAKE_SOURCE_DIR}/src/game.cpp
-  ${CMAKE_SOURCE_DIR}/src/levelloader.cpp
+  ${CMAKE_SOURCE_DIR}/src/level.cpp
   ${CMAKE_SOURCE_DIR}/src/main.cpp
   ${CMAKE_SOURCE_DIR}/src/player.cpp)
 

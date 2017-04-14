@@ -1,7 +1,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "levelloader.hpp"
+#include "level.hpp"
 #include "player.hpp"
 
 #include <YAGE/camera2d.hpp>

@@ -12,10 +12,12 @@
 
 enum class AnimationState
 {
+    STILL,
     IDLE,
     MOVING,
     JUMPING,
     CROUCHING,
+    FALLING,
 };
 
 class Animation
@@ -25,7 +27,7 @@ private:
     AnimationState current_animation_;
     int current_index_=0;
 public:
-    Animation();
+    Animation(); 
 
     void pushFrame(AnimationState state, const std::string &texture_path);
     yage::Texture currentFrame() const;
