@@ -3,10 +3,10 @@ project(arider)
 
 # set version number
 set(ARIDER_MAJOR_VERSION 0)
-set(ARIDER_MINOR_VERSION 1)
+set(ARIDER_MINOR_VERSION 2)
 set(ARIDER_PATCH_VERSION 0)
 set(ARIDER_VERSION
-  ${ARIDER_MAJOR_VERSION}.${ARIDERn_MINOR_VERSION}${ARIDER_PATCH_VERSION})
+  ${ARIDER_MAJOR_VERSION}.${ARIDER_MINOR_VERSION}${ARIDER_PATCH_VERSION})
 
 # set standard
 set(CMAKE_CXX_STANDARD 14)
@@ -14,12 +14,15 @@ set(CMAKE_CXX_STANDARD 14)
 # set include directories
 set(ARIDER_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include)
 
+# set source directory
+set(ARIDER_SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
+set(ARIDER_TEST_DIR ${CMAKE_SOURCE_DIR}/test)
+
 # setting right output directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-
 set(YAGE_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/YAGE/include/)
-set(YAGE_LIBRARIES YAGE)
+set(YAGE_LIBRARIES yage)
 
 # setting up configuration header
 configure_file (
@@ -29,13 +32,20 @@ configure_file (
 
 # adding my executable
 add_executable(${PROJECT_NAME}
-  ${CMAKE_SOURCE_DIR}/src/animation.cpp
-  ${CMAKE_SOURCE_DIR}/src/block.cpp  
-  ${CMAKE_SOURCE_DIR}/src/character.cpp
-  ${CMAKE_SOURCE_DIR}/src/game.cpp
-  ${CMAKE_SOURCE_DIR}/src/level.cpp
-  ${CMAKE_SOURCE_DIR}/src/main.cpp
-  ${CMAKE_SOURCE_DIR}/src/player.cpp)
+  ${ARIDER_SOURCE_DIR}/animation.cpp
+  ${ARIDER_SOURCE_DIR}/block.cpp  
+  ${ARIDER_SOURCE_DIR}/character.cpp
+  ${ARIDER_SOURCE_DIR}/game.cpp
+  ${ARIDER_SOURCE_DIR}/level.cpp
+  ${ARIDER_SOURCE_DIR}/main.cpp
+  ${ARIDER_SOURCE_DIR}/player.cpp)
+
+add_executable(test001
+  ${ARIDER_TEST_DIR}/test001.cpp)
+add_executable(test002
+  ${ARIDER_TEST_DIR}/test002.cpp)
+add_executable(test003
+  ${ARIDER_TEST_DIR}/test003.cpp)
 
 # adding sdl2 library
 include(FindPkgConfig)
@@ -58,3 +68,27 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
   ${OPENGL_LIBRARIES}
   ${GLEW_LIBRARIES}
   ${SDL2_LIBRARIES})
+
+target_link_libraries(test001
+  ${YAGE_LIBRARIES}
+  ${OPENGL_LIBRARIES}
+  ${GLEW_LIBRARIES}
+  )
+
+target_link_libraries(test002
+  ${YAGE_LIBRARIES}
+  ${OPENGL_LIBRARIES}
+  ${GLEW_LIBRARIES}
+  )
+
+target_link_libraries(test003
+  ${YAGE_LIBRARIES}
+  ${OPENGL_LIBRARIES}
+  ${GLEW_LIBRARIES}
+  )
+
+enable_testing()
+
+add_test(test1 ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test001)
+add_test(test2 ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test002)
+add_test(test3 ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test003)
