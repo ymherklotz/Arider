@@ -1,10 +1,9 @@
-#include <YAGE/spritebatch.hpp>
+#include <YAGE/texturecache.hpp>
 
 #include <iostream>
 
 int main(int, char**)
 {
-	yage::SpriteBatch sp;
 	std::cout<<"Hello World!\n";
 	return 0;
 }
