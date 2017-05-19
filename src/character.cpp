@@ -1,6 +1,5 @@
 #include "character.hpp"
 
-#include <YAGE/resourcemanager.hpp>
 #include <YAGE/vertex.hpp>
 
 void Character::create(const glm::vec2 &position/*=glm::vec2(0.f, 0.f)*/,

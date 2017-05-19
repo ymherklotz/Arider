@@ -3,6 +3,7 @@
 
 #include "level.hpp"
 #include "player.hpp"
+#include "particle.hpp"
 
 #include <YAGE/camera2d.hpp>
 #include <YAGE/glslprogram.hpp>
@@ -45,6 +46,8 @@ private:
     Player player_;
     //level
     Level level_;
+
+	Particle particle_;
 
     // member functions    
 public: 

@@ -38,14 +38,8 @@ add_executable(${PROJECT_NAME}
   ${ARIDER_SOURCE_DIR}/game.cpp
   ${ARIDER_SOURCE_DIR}/level.cpp
   ${ARIDER_SOURCE_DIR}/main.cpp
+  ${ARIDER_SOURCE_DIR}/particle.cpp
   ${ARIDER_SOURCE_DIR}/player.cpp)
-
-add_executable(test001
-  ${ARIDER_TEST_DIR}/test001.cpp)
-add_executable(test002
-  ${ARIDER_TEST_DIR}/test002.cpp)
-add_executable(test003
-  ${ARIDER_TEST_DIR}/test003.cpp)
 
 # adding sdl2 library
 include(FindPkgConfig)
@@ -68,27 +62,3 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
   ${OPENGL_LIBRARIES}
   ${GLEW_LIBRARIES}
   ${SDL2_LIBRARIES})
-
-target_link_libraries(test001
-  ${YAGE_LIBRARIES}
-  ${OPENGL_LIBRARIES}
-  ${GLEW_LIBRARIES}
-  )
-
-target_link_libraries(test002
-  ${YAGE_LIBRARIES}
-  ${OPENGL_LIBRARIES}
-  ${GLEW_LIBRARIES}
-  )
-
-target_link_libraries(test003
-  ${YAGE_LIBRARIES}
-  ${OPENGL_LIBRARIES}
-  ${GLEW_LIBRARIES}
-  )
-
-enable_testing()
-
-add_test(test1 ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test001)
-add_test(test2 ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test002)
-add_test(test3 ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test003)
