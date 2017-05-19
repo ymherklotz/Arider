@@ -47,7 +47,7 @@ find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 pkg_search_module(SDL2 REQUIRED sdl2)
 
-# add zedengine library
+# add yage library
 add_subdirectory(YAGE)
 
 # adding include directories
