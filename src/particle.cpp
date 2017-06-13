@@ -1,8 +1,10 @@
 #include "particle.hpp"
 
+#include <YAGE/Math/vector2d.hpp>
+
 #include <YAGE/resourcemanager.hpp>
 
-Particle::Particle() : particle_body_(glm::vec2(200.f/70.f, 600.f/70.f))
+Particle::Particle() : particle_body_(yage::Vector2D(200.f/70.f, 600.f/70.f))
 {}
 
 Particle::~Particle()

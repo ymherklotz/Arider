@@ -21,7 +21,8 @@ set(ARIDER_TEST_DIR ${CMAKE_SOURCE_DIR}/test)
 # setting right output directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-set(YAGE_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/YAGE/include/)
+set(YAGE_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/YAGE/include/
+  ${CMAKE_SOURCE_DIR}/YAGE/include/YAGE/)
 set(YAGE_LIBRARIES yage)
 
 # setting up configuration header
