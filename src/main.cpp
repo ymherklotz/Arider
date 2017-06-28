@@ -8,23 +8,23 @@
 
 int main()
 {
-    std::cout<<"Arider\nVersion: "<<ARIDER_MAJOR_VERSION<<"."<<ARIDER_MINOR_VERSION
-	     <<"."<<ARIDER_PATCH_VERSION<<'\n';
+	std::cout<<"Arider\nVersion: "<<ARIDER_MAJOR_VERSION<<"."<<ARIDER_MINOR_VERSION
+	         <<"."<<ARIDER_PATCH_VERSION<<'\n';
 
-    Game game;
+	Game game;
 
-    try
-    {
-	game.run();
-    }
-    catch(std::exception &e)
-    {
-	std::cerr<<"Error : "<<e.what()<<'\n';
-    }
-    catch(...)
-    {
-	std::cerr<<"Error : Exception occured\n";
-    }
+	try
+	{
+		game.run();
+	}
+	catch(std::exception &e)
+	{
+		std::cerr<<"Error : "<<e.what()<<'\n';
+	}
+	catch(...)
+	{
+		std::cerr<<"Error : Exception occured\n";
+	}
 
-    return 0;
+	return 0;
 }

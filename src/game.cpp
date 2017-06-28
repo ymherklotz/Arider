@@ -4,11 +4,8 @@
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
-#include <SDL2/SDL.h>
 
-#include <YAGE/texture.hpp>
-#include <YAGE/resourcemanager.hpp>
-#include <YAGE/vertex.hpp>
+#include <YAGE/yage.hpp>
 
 #include <stdexcept>
 #include <iostream>
@@ -21,7 +18,7 @@ Game::Game(int screen_width/*=1280*/, int screen_height/*=720*/) :
 
 Game::~Game()
 {
-	SDL_Quit();
+	yage::quit();
 }
 
 void Game::run()
@@ -33,8 +30,11 @@ void Game::run()
 
 void Game::initSystems()
 {
-	if(SDL_Init(SDL_INIT_VIDEO))
-		throw std::runtime_error("SDL_Init failed");
+	if(yage::init())
+	{
+		throw std::runtime_error("Failed initialization");
+	}
+	
 	window_.create("Arider", screen_width_, screen_height_, yage::WindowFlags::SHOWN);
 	initShaders();
 
